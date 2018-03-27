@@ -4,7 +4,9 @@
 
 #include <PrimSolver.h>
 
-void readGraph(char *location, CSRGraph *csrGraph);
+void readCsrFile(char *location, CSRGraph *csrGraph);
+
+void readCooFile(char *location, CSRGraph *csrGraph);
 
 
 #endif //SOLVINGPROGRAM_PARSEGRAPHFILE_H

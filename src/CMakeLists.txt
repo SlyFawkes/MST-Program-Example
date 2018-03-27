@@ -3,7 +3,7 @@ project(SolvingProgram)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp ParseGraphFile.cpp ParseGraphFile.h)
+set(SOURCE_FILES main.cpp ParseGraphFile.cpp ParseGraphFile.h mmio.h mmio.cpp)
 
 add_library(SolvingLibrary STATIC IMPORTED)
 SET_TARGET_PROPERTIES(SolvingLibrary PROPERTIES IMPORTED_LOCATION /home/dan/CSC_final_year/CSC3002_project/code/SolvingLibrary/cmake-build-release/src/libSolvingLibrary.a)

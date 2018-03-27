@@ -56,7 +56,7 @@ int main() {
     char a;
 
     CSRGraph csrGraph1 = CSRGraph();
-    readGraph(&a, &csrGraph1);
+    readCsrFile(&a, &csrGraph1);
 
 
     PrimSolver primSolver1 = PrimSolver(&csrGraph1);
@@ -81,5 +81,30 @@ int main() {
         printf("\nEdge %d, NodeA %d, Node B %d, Weight %d", x, mstEdges1[x].nodeA, mstEdges1[x].nodeB, mstEdges1[x].weight);
     }
     printf("\n");
+
+
+
+
+    CSRGraph csrGraph2 = CSRGraph();
+    readCooFile(&a, &csrGraph2);
+
+    for (int x = 0; x < csrGraph2.numberOfEdges; x++) {
+//        EXPECT_EQ(mstEdges[x], knownMstEdges[x]);
+//        printf("\n%s", mstEdges1[x] == knownMstEdges1[x] ? "True" : "False");
+
+        printf("%d, %d\n", csrGraph2.edgeList[x], csrGraph2.weightsList[x]);
+    }
+
+
+    PrimSolver primSolver2 = PrimSolver(&csrGraph2);
+    Edge mstEdges2[csrGraph2.numberOfNodes - 1] = {};
+    primSolver2.solve(mstEdges2);
+
+    for (int x = 0; x < csrGraph2.numberOfNodes - 1; x++) {
+
+        printf("\nEdge %d, NodeA %d, Node B %d, Weight %d", x, mstEdges2[x].nodeA, mstEdges2[x].nodeB, mstEdges2[x].weight);
+    }
+    printf("\n");
+
 
 }
