@@ -1,65 +1,19 @@
 #include <iostream>
-#include "PrimSolver.h"
+#include <DataStructures/CSRGraph.h>
+#include <DataStructures/Edge.h>
+#include "KruskalSolver.h"
 #include "ParseGraphFile.h"
 
+
 int main() {
-//    std::cout << "Hello, World!" << std::endl;
-//    Edge edge = Edge();
-//    CSRGraph csrGraph = CSRGraph();
-//    PrimSolver primsolver = PrimSolver(&csrGraph);
-//    primsolver.solve(&edge);
-//    int y = x.edgeList[0];
-//    return 0;
 
-
-
-
-//    CSRGraph csrGraph = CSRGraph();
-//    csrGraph.numberOfNodes = 10;
-//    csrGraph.numberOfEdges = 42;
-//    int nodeList[csrGraph.numberOfNodes + 1] ={0, 4, 8, 13, 16, 20, 24, 28, 34, 39, 42};
-//    int edgeList[csrGraph.numberOfEdges] = {1, 2, 8, 9, 0, 2, 7, 8, 0, 1, 3, 4, 7, 2, 4, 5, 2, 3, 5, 7, 3, 4, 6, 7, 5, 7, 8, 9, 1, 2, 4, 5, 6, 8, 0, 1, 6, 7, 9, 0, 6, 8};
-//    int weightList[csrGraph.numberOfEdges] = {2, 9, 4, 6, 2, 9, 8, 2, 9, 9, 4, 5, 7, 4, 1, 4, 5, 1, 3, 9, 4, 3, 18, 10, 18, 8, 9, 9, 8, 7, 9, 10, 8, 9, 4, 2, 9, 9, 3, 6, 9, 3};
-//
-//    csrGraph.nodeList = new int[csrGraph.numberOfNodes + 1];
-//    csrGraph.edgeList = new int[csrGraph.numberOfEdges];
-//    csrGraph.weightsList = new int [csrGraph.numberOfEdges];
-//    for (int i = 0; i <= csrGraph.numberOfNodes; i++) {
-//        csrGraph.nodeList[i] = nodeList[i];
-//    }
-//    for (int i = 0; i < csrGraph.numberOfEdges; i++) {
-//        csrGraph.edgeList[i] = edgeList[i];
-//        csrGraph.weightsList[i] = weightList[i];
-//    }
-//    PrimSolver primSolver = PrimSolver(&csrGraph);
-//    Edge mstEdges[csrGraph.numberOfNodes - 1] = {};
-//    primSolver.solve(mstEdges);
-//
-//    Edge knownMstEdges[csrGraph.numberOfNodes - 1] = {};
-//    knownMstEdges[0] = Edge(0, 1, 2);
-//    knownMstEdges[1] = Edge(1, 8, 2);
-//    knownMstEdges[2] = Edge(8, 9, 3);
-//    knownMstEdges[3] = Edge(1, 7, 8);
-//    knownMstEdges[4] = Edge(7, 2, 7);
-//    knownMstEdges[5] = Edge(2, 3, 4);
-//    knownMstEdges[6] = Edge(3, 4, 1);
-//    knownMstEdges[7] = Edge(4, 5, 3);
-//    knownMstEdges[8] = Edge(7, 6, 8);
-//
-//    for (int x = 0; x < csrGraph.numberOfNodes - 1; x++) {
-////        EXPECT_EQ(mstEdges[x], knownMstEdges[x]);
-//        printf("\n%s", mstEdges[x] == knownMstEdges[x] ? "True" : "False");
-//
-//        printf("\nEdge %d, NodeA %d, Node B %d, Weight %d", x, mstEdges[x].nodeA, mstEdges[x].nodeB, mstEdges[x].weight);
-//    }
-//    printf("\n");
-    char a;
+    const char* a = "/home/dan/CSC_final_year/CSC3002_project/code/SolvingProgram/resources/testGraph.txt";
 
     CSRGraph csrGraph1 = CSRGraph();
-    readCsrFile(&a, &csrGraph1);
+    readCsrFile(a, &csrGraph1);
 
 
-    PrimSolver primSolver1 = PrimSolver(&csrGraph1);
+    KruskalSolver primSolver1 = KruskalSolver(&csrGraph1);
     Edge mstEdges1[csrGraph1.numberOfNodes - 1] = {};
     primSolver1.solve(mstEdges1);
 
@@ -75,7 +29,6 @@ int main() {
     knownMstEdges1[8] = Edge(7, 6, 8);
 
     for (int x = 0; x < csrGraph1.numberOfNodes - 1; x++) {
-//        EXPECT_EQ(mstEdges[x], knownMstEdges[x]);
         printf("\n%s", mstEdges1[x] == knownMstEdges1[x] ? "True" : "False");
 
         printf("\nEdge %d, NodeA %d, Node B %d, Weight %d", x, mstEdges1[x].nodeA, mstEdges1[x].nodeB, mstEdges1[x].weight);
@@ -83,20 +36,15 @@ int main() {
     printf("\n");
 
 
+    const char* b = "/home/dan/CSC_final_year/CSC3002_project/code/SolvingProgram/resources/G64.mtx";
 
 
     CSRGraph csrGraph2 = CSRGraph();
-    readCooFile(&a, &csrGraph2);
-
-    for (int x = 0; x < csrGraph2.numberOfEdges; x++) {
-//        EXPECT_EQ(mstEdges[x], knownMstEdges[x]);
-//        printf("\n%s", mstEdges1[x] == knownMstEdges1[x] ? "True" : "False");
-
-        printf("%d, %d\n", csrGraph2.edgeList[x], csrGraph2.weightsList[x]);
-    }
+    readCooFile(b, &csrGraph2);
 
 
-    PrimSolver primSolver2 = PrimSolver(&csrGraph2);
+
+    KruskalSolver primSolver2 = KruskalSolver(&csrGraph2);
     Edge mstEdges2[csrGraph2.numberOfNodes - 1] = {};
     primSolver2.solve(mstEdges2);
 
@@ -105,6 +53,5 @@ int main() {
         printf("\nEdge %d, NodeA %d, Node B %d, Weight %d", x, mstEdges2[x].nodeA, mstEdges2[x].nodeB, mstEdges2[x].weight);
     }
     printf("\n");
-
 
 }

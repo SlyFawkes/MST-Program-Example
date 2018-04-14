@@ -1,16 +1,15 @@
 
 
-//#include "ParseGraphFile.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
-#include "PrimSolver.h"
+#include "ParseGraphFile.h"
 #include "mmio.h"
 
 
 
-void readCsrFile(char *location, CSRGraph *csrGraph) {
+void readCsrFile(const char *location, CSRGraph *csrGraph) {
 
     std::string graphType;
     size_t numberOfNodes;
@@ -19,7 +18,7 @@ void readCsrFile(char *location, CSRGraph *csrGraph) {
 
     std::ifstream inFile;
 
-    inFile.open("/home/dan/CSC_final_year/CSC3002_project/code/SolvingProgram/resources/testGraph.txt");
+    inFile.open(location);
 
     if (!inFile) {
         std::cout << "unable to open file";
@@ -87,21 +86,12 @@ void readCsrFile(char *location, CSRGraph *csrGraph) {
         printf("\n");
     }
 
-
-//    while (inFile >> x) {
-//        printf("\n%d\n", x);
-//    }
-//    inFile >> x;
-//    printf("\n%d\n", x);
-
-
     inFile.close();
 
-//    return csrGraph;
 }
 
 
-void readCooFile(char *location, CSRGraph *csrGraph) {
+void readCooFile(const char *location, CSRGraph *csrGraph) {
 
     MM_typecode matcode;
     FILE *f;
@@ -109,13 +99,13 @@ void readCooFile(char *location, CSRGraph *csrGraph) {
     int i, *I, *J;
     int *val;
 
-    f = fopen("/home/dan/CSC_final_year/CSC3002_project/code/SolvingProgram/resources/Stranke94.mtx", "r");
+    f = fopen(location, "r");
 
     if (mm_read_banner(f, &matcode) != 0) {
         printf("bad bad bad");
     }
 
-    if ( mm_read_mtx_crd_size(f, &M, &N, &nz) !=0) {
+    if (mm_read_mtx_crd_size(f, &M, &N, &nz) != 0) {
         printf("mtxcrdsize");
         exit(1);
     }
@@ -137,7 +127,6 @@ void readCooFile(char *location, CSRGraph *csrGraph) {
         J[i]--;
         nodeCount[I[i]]++;
         nodeCount[J[i]]++;
-        printf("%d %d %d %d %d\n", I[i], J[i], val[i], nodeCount[I[i]], nodeCount[J[i]]);
 
     }
 
@@ -174,14 +163,19 @@ void readCooFile(char *location, CSRGraph *csrGraph) {
         csrGraph->weightsList[csrGraph->nodeList[node1] + edgeCount[node1]] = weight;
         csrGraph->weightsList[csrGraph->nodeList[node2] + edgeCount[node2]] = weight;
 
-
-
         edgeCount[node1]++;
         edgeCount[node2]++;
-
 
     }
 
 
+    for (int x = 0; x < nz*2+1; x++) {
+        printf("%d\n", csrGraph->edgeList[x]);
+    }
+
+    printf("------------------------------------------------------");
+    for (int x = 0; x < M+1; x++) {
+        printf("%d, %d, %d\n", csrGraph->nodeList[x], csrGraph->edgeList[csrGraph->nodeList[x]], x);
+    }
 
 }
