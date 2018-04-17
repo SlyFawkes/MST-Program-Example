@@ -6,7 +6,7 @@
 #include <cstring>
 
 void run(char* graphType, char* location, char* solverType) {
-    CSRGraph* csrGraph = new CSRGraph();
+    auto * csrGraph = new CSRGraph();
     Solver* solver;
 
     if (!strcmp(graphType, "COO")) {
