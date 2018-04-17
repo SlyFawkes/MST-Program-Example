@@ -1,8 +1,8 @@
 
 #include "KruskalSolver.h"
+#include "PrimSolver.h"
 #include "ParseGraphFile.h"
 #include <iostream>
-#include <PrimSolver.h>
 #include <cstring>
 
 void run(char* graphType, char* location, char* solverType) {
