@@ -35,9 +35,9 @@ void readCsrFile(const char *location, CSRGraph *csrGraph) {
     csrGraph->numberOfNodes = numberOfNodes;
     csrGraph->numberOfEdges = numberOfEdges;
 
-    csrGraph->nodeList = new size_t[numberOfNodes + 1];
+    csrGraph->nodeList = new int[numberOfNodes + 1];
     csrGraph->nodeList[0] = 0;
-    csrGraph->edgeList = new size_t[numberOfEdges];
+    csrGraph->edgeList = new int[numberOfEdges];
     csrGraph->weightsList = new int[numberOfEdges];
 
 
@@ -53,7 +53,7 @@ void readCsrFile(const char *location, CSRGraph *csrGraph) {
 
         int n;
         while (is >> n) {
-            csrGraph->edgeList[count] = static_cast<size_t>(n);
+            csrGraph->edgeList[count] = n;
             count++;
         }
         csrGraph->nodeList[index + 1] = count;
@@ -139,9 +139,9 @@ void readCooFile(const char *location, CSRGraph *csrGraph) {
     csrGraph->numberOfNodes = numberOfNodes;
     csrGraph->numberOfEdges = numberOfEdges;
 
-    csrGraph->nodeList = new size_t[numberOfNodes + 1];
+    csrGraph->nodeList = new int[numberOfNodes + 1];
     csrGraph->nodeList[0] = 0;
-    csrGraph->edgeList = new size_t[numberOfEdges];
+    csrGraph->edgeList = new int[numberOfEdges];
     csrGraph->weightsList = new int[numberOfEdges];
 
     for (int j = 0; j < numberOfNodes; j++) {
@@ -155,8 +155,8 @@ void readCooFile(const char *location, CSRGraph *csrGraph) {
         int node2 = I[edge];
         int weight = val[edge];
 
-        csrGraph->edgeList[csrGraph->nodeList[node1] + edgeCount[node1]] = static_cast<size_t>(node2);
-        csrGraph->edgeList[csrGraph->nodeList[node2] + edgeCount[node2]] = static_cast<size_t>(node1);
+        csrGraph->edgeList[csrGraph->nodeList[node1] + edgeCount[node1]] = node2;
+        csrGraph->edgeList[csrGraph->nodeList[node2] + edgeCount[node2]] = node1;
         csrGraph->weightsList[csrGraph->nodeList[node1] + edgeCount[node1]] = weight;
         csrGraph->weightsList[csrGraph->nodeList[node2] + edgeCount[node2]] = weight;
 
