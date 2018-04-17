@@ -5,7 +5,7 @@
 #include <PrimSolver.h>
 #include <cstring>
 
-int run(char* graphType, char* location, char* solverType) {
+void run(char* graphType, char* location, char* solverType) {
     CSRGraph* csrGraph = new CSRGraph();
     Solver* solver;
 
