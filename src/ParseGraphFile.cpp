@@ -1,9 +1,7 @@
-
-
 #include <fstream>
+
 #include <iostream>
 #include <sstream>
-
 #include "ParseGraphFile.h"
 #include "mmio.h"
 
@@ -59,18 +57,18 @@ void readCsrFile(const char *location, CSRGraph *csrGraph) {
 
         int n;
         while (is >> n) {
-            printf("%d ", n);
+//            printf("%d ", n);
             csrGraph->edgeList[count] = n;
             count++;
         }
         csrGraph->nodeList[index + 1] = count; //TODO change nodelist to size_t
-        printf("\n");
+//        printf("\n");
     }
 
     count = 0;
     while (count < numberOfEdges) {
         getline(inFile, line);
-        std::cout << line << " count - " << count << "\n";
+//        std::cout << line << " count - " << count << "\n";
 
         std::istringstream is(line);
 
@@ -79,18 +77,26 @@ void readCsrFile(const char *location, CSRGraph *csrGraph) {
 
         int n;
         while (is >> n) {
-            printf("%d ", n);
+//            printf("%d ", n);
             csrGraph->weightsList[count] = n;
             count++;
         }
-        printf("\n");
+//        printf("\n");
     }
 
     inFile.close();
 
 }
 
-
+/*
+*   Matrix Market I/O library for ANSI C
+*
+*   See http://math.nist.gov/MatrixMarket for details.
+*
+*   Adapted from https://math.nist.gov/MatrixMarket/mmio/c/example_read.c
+*
+*
+*/
 void readCooFile(const char *location, CSRGraph *csrGraph) {
 
     MM_typecode matcode;
@@ -168,14 +174,14 @@ void readCooFile(const char *location, CSRGraph *csrGraph) {
 
     }
 
-
-    for (int x = 0; x < nz*2+1; x++) {
-        printf("%d\n", csrGraph->edgeList[x]);
-    }
-
-    printf("------------------------------------------------------");
-    for (int x = 0; x < M+1; x++) {
-        printf("%d, %d, %d\n", csrGraph->nodeList[x], csrGraph->edgeList[csrGraph->nodeList[x]], x);
-    }
+//
+//    for (int x = 0; x < nz*2+1; x++) {
+//        printf("%d\n", csrGraph->edgeList[x]);
+//    }
+//
+//    printf("------------------------------------------------------");
+//    for (int x = 0; x < M+1; x++) {
+//        printf("%d, %d, %d\n", csrGraph->nodeList[x], csrGraph->edgeList[csrGraph->nodeList[x]], x);
+//    }
 
 }
