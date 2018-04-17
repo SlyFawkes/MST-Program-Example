@@ -41,14 +41,14 @@ void readCsrFile(const char *location, CSRGraph *csrGraph) {
     csrGraph->weightsList = new int[numberOfEdges];
 
 
-    std::cout << graphType << "\n" << numberOfNodes << "\n" << numberOfEdges << "\n";
+//    std::cout << graphType << "\n" << numberOfNodes << "\n" << numberOfEdges << "\n";
 
 
     std::string line;
     size_t count = 0;
     while (count < numberOfEdges) {
         getline(inFile, line);
-        std::cout << line << " count - " << count << "\n";
+//        std::cout << line << " count - " << count << "\n";
 
         std::istringstream is(line);
 
